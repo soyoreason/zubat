@@ -1,4 +1,4 @@
-package com.tamagawa.utils;
+package xyz.tamagawa.utils;
 
 public interface TestAAA {
 
