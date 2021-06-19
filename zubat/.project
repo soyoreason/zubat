@@ -20,4 +20,11 @@
 		<nature>org.eclipse.jdt.core.javanature</nature>
 		<nature>org.eclipse.m2e.core.maven2Nature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>src/test/resources/testng-customsuite.xml</name>
+			<type>1</type>
+			<location>/private/var/folders/ft/xy74mx_s2f3cl3y9l9qmh2fr0000gp/T/testng-eclipse--1774869292/testng-customsuite.xml</location>
+		</link>
+	</linkedResources>
 </projectDescription>
