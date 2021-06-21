@@ -36,14 +36,15 @@ public class Main {
 		System.out.println("=======================================ggggg");
 		try {
 			System.out.println("[testNG]_start_june18...__");
-			String fileName = "/Users/dwilkins/tmp/BOMTest/";
-//			fileName += "bbeUtf8WithBOM.txt";
+			String fileName = "/Users/dwilkins/Documents/Tamagawa/Data/BOMs/";
+//			fileName += "bbeUTF16LEbom.txt";
+//			fileName += "bbeUTF8bom.txt";
+			fileName += "bbeUTF16.txt";
+//			fileName += "bbeGB18030.txt"; // <-- no BOM
 			
 
-			fileName += "bbeWinLatin1.txt";
-//			fileName += "withBomUtf8.txt";
+//			fileName += "bbeWinLatin1.txt";
 //			fileName += "bomUtf16be.txt";
-//			fileName += "bom16le.txt";
 //			fileName += "bomUtf32le.txt";
 			
 //			fileName += "bbeUtf16le.txt";
@@ -56,7 +57,7 @@ public class Main {
 			Map<Integer, BOM.XtdCharset> boms = BOM.locateBOMs(f);
 			for(Map.Entry<Integer, BOM.XtdCharset> entry : boms.entrySet()) {
 				String s = entry.getValue().name();
-				System.out.println("[6/18]___" + s + "___[6/18]___at --> _" + entry.getKey() + "_");
+				System.out.println("[6/19]___" + s + "____at --> _" + entry.getKey() + "_");
 			} 
 		} catch(Exception e) {
 			e.printStackTrace();
