@@ -54,11 +54,11 @@ public class Main {
 			
 			File f = new File(fileName);
 //			Map<Integer, BOM.XtdCharset> boms = BOM.locateByteOrderMarks(f);
-			Map<Integer, BOM.XtdCharset> boms = BOM.locateBOMs(f);
-			for(Map.Entry<Integer, BOM.XtdCharset> entry : boms.entrySet()) {
-				String s = entry.getValue().name();
-				System.out.println("[6/19]___" + s + "____at --> _" + entry.getKey() + "_");
-			} 
+//			Map<Integer, BOM.XtdCharset> boms = BOM.locateBOMs(f);
+//			for(Map.Entry<Integer, BOM.XtdCharset> entry : boms.entrySet()) {
+//				String s = entry.getValue().name();
+//				System.out.println("[6/19]___" + s + "____at --> _" + entry.getKey() + "_");
+//			} 
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
