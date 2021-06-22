@@ -6,8 +6,12 @@ import java.nio.file.Files;
 import java.util.HashMap;
 import java.util.Map;
 import javax.xml.bind.DatatypeConverter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 
 interface BOM {
+	Logger log = LoggerFactory.getLogger(BOM.class);
 	
 	enum XtdCharset {
 		UTF8 ("EFBBBF"), // {239, 187, 191}
@@ -27,18 +31,27 @@ interface BOM {
 		String BOMhex;
 		
 		XtdCharset(String s) {
+			BOMhex = "0x" + s;
+			log.info("Creating enum XtdCharset: " + this.name() + "/" + BOMhex + ";");
 			this.BOM = DatatypeConverter.parseHexBinary(s);
-			this.BOMhex = "0x" + s;
 		}
 	}	
 	
+
 	// ---===---
 	static Map<Integer, XtdCharset> locateBOMs(File f) throws IOException {
-		byte[] dump = Files.readAllBytes(f.toPath());
-		return locateBOMs(dump);
+		try {
+			log.info("Searching for BOMs in file: " + f.getCanonicalPath() + ";");
+			byte[] dump = Files.readAllBytes(f.toPath());
+			return locateBOMs(dump);
+		} catch (IOException e) {
+			log.error("Error with reference to file:" + f.getCanonicalPath() + ";");
+			throw e;
+		}
 	}
-
+	
 	static Map<Integer, XtdCharset> locateBOMs(byte[] data) {
+		log.info("Searching for BOMs in " + data.length + " bytes;");
 		Map<Integer, XtdCharset> bomLocations = new HashMap<>();
 		int i_utf8 = 0, i_utf16be = 0, i_utf16le = 0, i_utf32be = 0, i_utf32le = 0;
 
@@ -60,6 +73,7 @@ interface BOM {
 			if(i_utf32le==XtdCharset.UTF32le.BOM.length) {
 				bomLocations.put(i - i_utf32le + 1, XtdCharset.UTF32le); i_utf32le = 0; }	
 		}
+		log.debug(bomLocations.size() + " BOMs discovered;");
 		return bomLocations;
 	}
 
